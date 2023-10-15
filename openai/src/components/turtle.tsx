@@ -1,8 +1,11 @@
 import { OpenAI } from "langchain/llms/openai";
 
+interface Turtle {
+    prompt: string,
+    apiKey: string
+}
 
-export const turtle = async ({prompt, apiKey}: {prompt: string, apiKey: string}) => {
-   
+export const turtle = async ({prompt, apiKey}: Turtle) => {
     const llm = new OpenAI({
         temperature: 0.9,
         openAIApiKey: apiKey,
@@ -10,6 +13,5 @@ export const turtle = async ({prompt, apiKey}: {prompt: string, apiKey: string})
     });
    
     const llmResult = await llm.predict(prompt);
-    //console.log(llmResult);
     return llmResult
 }

@@ -1,41 +1,55 @@
 import './App.css';
 import { turtle } from './components/turtle';
 import { simulation } from './components/agents';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { AliceObservations, BobObservations } from './components/constants';
 
 function App() {
-  const [data, setData] = useState<string | null>(null); // Using null as initial state
+  const [turtleName, setTurtleName] = useState('...'); // Using an empty string as initial state
+  const [allConversations, setAllConversations] = useState<string[]>(['Alice and Bob are talking!']); // Using an empty string as initial state
   const [error, setError] = useState<Error | null>(null); // To handle any potential error
+
   const prompt = "Name a turtle stands in front of a library";
   const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY? process.env.REACT_APP_OPENAI_API_KEY :'';
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const turtleName = await turtle({prompt: "Your prompt here", apiKey: OPENAI_API_KEY});
-        setData(turtleName);
-        await simulation(OPENAI_API_KEY);
 
+  useEffect(() => {
+    console.log("running"); // Log here
+    const turtleNamer = async () => {
+      try {
+        const turtleName = await turtle({prompt: prompt, apiKey: OPENAI_API_KEY});
+        setTurtleName(turtleName);
       } catch (error) {
         console.error("An error occurred:", error);
+        setError(error as Error);
       }
     };
-    
-    fetchData();
+    turtleNamer();
+
+    const simulationRunner = async () => {
+      try {
+        const allConversations = await simulation(OPENAI_API_KEY);
+        setAllConversations(allConversations);
+      } catch (error) {
+        console.error("An error occurred:", error);
+        setError(error as Error);
+      }
+    };
+    simulationRunner();
+
   }, []);
   return (
     <div className="App">
+      <div>
+        <p> {prompt} </p>
+        <p className='answer'> {turtleName}</p>
+      </div>
+      <p>{"Alice and Bob discuss lunch options"}</p>
+      <div className='memory'> {AliceObservations.join('. ')}</div>
+      <div className='memory'> {BobObservations.join('. ')}</div>
+      <div> {allConversations.map((conversation, index) => (
+          <p key={index} className='answer'> {conversation} </p>
+        ))}</div>
       {error && <p>Error: {error.message}</p>}
-      {data ? (
-        <div>
-        <p> {prompt} </p>
-        <b> {data}</b>
-        </div>
-      ) : (
-        <div>
-        <p> {prompt} </p>
-        <b> loading ...</b>
-        </div>
-      )}
     </div>
   );
 }

@@ -4,7 +4,19 @@ div {
 
 p {
   font-size: 20px;
-  font-weight: bold;
   color: #000000;
+  text-align: left;
+}
+
+.memory {
+  font-size: 14px;
+  color: gray;
+  text-align: left;
+  font-family: monospace;
+}
+
+.answer {
+  font-size: 14px;
+  color: steelblue;
   text-align: left;
 }
