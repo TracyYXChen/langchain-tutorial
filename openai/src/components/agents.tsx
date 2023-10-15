@@ -139,10 +139,10 @@ export const simulation = async (apiKey: string) => {
   // Next reply: Alice said "Sounds perfect! 12:30 PM works for me. I can't wait to try the delicious vegetarian options at Jodeem African Cuisine. See you then, Bob!"
 
   const parties: GenerativeAgent[] = [Alice, Bob];
-  // await runConversation(
-  //   parties,
-  //   "Alice said: Hey Bob, where should we have lunch, how about sweetgreen?"
-  // );
+  await runConversation(
+    parties,
+    "Alice said: Hey Bob, where should we have lunch, how about sweetgreen?"
+  );
 
   const interviewAgent = async (
     agent: GenerativeAgent,

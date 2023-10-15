@@ -43,7 +43,7 @@ function App() {
         <p> {prompt} </p>
         <p className='answer'> {turtleName}</p>
       </div>
-      <p>{"Alice and Bob discuss lunch options"}</p>
+      <div><p>Alice and Bob discuss lunch options</p></div>
       <div className='memory'> {AliceObservations.join('. ')}</div>
       <div className='memory'> {BobObservations.join('. ')}</div>
       <div> {allConversations.map((conversation, index) => (
