@@ -139,6 +139,7 @@ export const simulation = async (apiKey: string) => {
   // Next reply: Alice said "Sounds perfect! 12:30 PM works for me. I can't wait to try the delicious vegetarian options at Jodeem African Cuisine. See you then, Bob!"
 
   const parties: GenerativeAgent[] = [Alice, Bob];
+  allConversations.push("Alice said: Hey Bob, where should we have lunch, how about sweetgreen?");
   await runConversation(
     parties,
     "Alice said: Hey Bob, where should we have lunch, how about sweetgreen?"
@@ -159,7 +160,7 @@ export const simulation = async (apiKey: string) => {
     Alice,
     "Where are you going to have lunch with Bob?"
   );
-  allConversations.push("Host: where are you going to have lunch with Bob?");
+  allConversations.push("Host: after the discussion, where do you and Bob decide to have lunch?");
   allConversations.push(interviewAlice);
 
   //let's check Bob's memory
@@ -168,7 +169,7 @@ export const simulation = async (apiKey: string) => {
     "Where are you going to have lunch with Alice?"
   );
 
-  allConversations.push("Host: where are you going to have lunch with Alice?");
+  allConversations.push("Host: after the discussion, where do you and Alice decide to have lunch?");
   allConversations.push(interviewBob);
   return allConversations;
 };

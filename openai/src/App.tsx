@@ -6,7 +6,8 @@ import { AliceObservations, BobObservations } from './components/constants';
 
 function App() {
   const [turtleName, setTurtleName] = useState('...'); // Using an empty string as initial state
-  const [allConversations, setAllConversations] = useState<string[]>(['Alice and Bob are talking!']); // Using an empty string as initial state
+  const [allConversations, setAllConversations] = useState<string[]>(['Alice said: Hi', 
+  'Bob said: Hello', 'Host said: Yes']); // Using an empty string as initial state
   const [error, setError] = useState<Error | null>(null); // To handle any potential error
 
   const prompt = "Name a turtle stands in front of a library";
@@ -47,7 +48,9 @@ function App() {
       <div className='memory'> {AliceObservations.join('. ')}</div>
       <div className='memory'> {BobObservations.join('. ')}</div>
       <div> {allConversations.map((conversation, index) => (
-          <p key={index} className='answer'> {conversation} </p>
+       conversation.includes("Alice said")? <p key={index} className='alice'> {conversation} </p>: 
+       (conversation.includes("Bob said")? <p key={index} className='bob'> {conversation} </p>: 
+       <p key={index} className='host'> {conversation} </p>)
         ))}</div>
       {error && <p>Error: {error.message}</p>}
     </div>

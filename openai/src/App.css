@@ -1,3 +1,7 @@
+.App {
+  width: 50%;
+}
+
 div {
   margin: 20px;
 }
@@ -9,14 +13,32 @@ p {
 }
 
 .memory {
-  font-size: 14px;
-  color: gray;
+  font-size: 1.2em;
+  color: black;
   text-align: left;
   font-family: monospace;
 }
 
 .answer {
-  font-size: 14px;
+  font-size: 1.2em;
   color: steelblue;
   text-align: left;
+}
+
+.alice {
+  font-size: 1.2em;
+  color: steelblue;
+  text-align: left;
+}
+
+.bob {
+  font-size: 1.2em;
+  color: orange;
+  text-align: right;
+}
+
+.host {
+  font-size: 16px;
+  color: black;
+  text-align: center;
 }
